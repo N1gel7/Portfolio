@@ -1,8 +1,11 @@
-import React from 'react'
-import { FaCode, FaUsers, FaClock, FaTrophy, FaDollarSign, FaShieldAlt } from 'react-icons/fa'
+import React, { useState, useRef, useEffect } from 'react'
+import { FaCode, FaUsers, FaClock, FaTrophy, FaDollarSign, FaShieldAlt, FaPlay, FaSpinner } from 'react-icons/fa'
 import './Projects.css'
 
 const Projects = () => {
+  const [videoStates, setVideoStates] = useState({})
+  const [isIntersecting, setIsIntersecting] = useState({})
+
   const projects = [
     {
       title: "WASSCE Past Questions Web App",
@@ -32,6 +35,45 @@ const Projects = () => {
     }
   ]
 
+  // Video lazy loading and optimization
+  const videoRefs = useRef({})
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const videoIndex = entry.target.dataset.videoIndex
+            setIsIntersecting(prev => ({ ...prev, [videoIndex]: true }))
+            
+            // Load video when it comes into view
+            const video = entry.target.querySelector('video')
+            if (video && !video.src) {
+              video.src = video.dataset.src
+              video.load()
+            }
+          }
+        })
+      },
+      { threshold: 0.1, rootMargin: '50px' }
+    )
+
+    // Observe all video containers
+    Object.values(videoRefs.current).forEach(ref => {
+      if (ref) observer.observe(ref)
+    })
+
+    return () => observer.disconnect()
+  }, [])
+
+  const handleVideoLoad = (index) => {
+    setVideoStates(prev => ({ ...prev, [index]: 'loaded' }))
+  }
+
+  const handleVideoError = (index) => {
+    setVideoStates(prev => ({ ...prev, [index]: 'error' }))
+  }
+
   return (
     <section id="projects" className="projects">
       <div className="container">
@@ -50,17 +92,54 @@ const Projects = () => {
               </div>
 
               <div className="project-video">
-                <div className="video-container">
-                  <video
-                    id={`video-${index}`}
-                    className="project-video-element"
-                    preload="metadata"
-                    controls
-                    controlsList="nodownload"
-                  >
-                    <source src={project.video} type={project.video.endsWith('.MOV') ? 'video/quicktime' : 'video/mp4'} />
-                    Your browser does not support the video tag.
-                  </video>
+                <div 
+                  className="video-container"
+                  ref={el => videoRefs.current[index] = el}
+                  data-video-index={index}
+                >
+                  {!isIntersecting[index] ? (
+                    <div className="video-placeholder">
+                      <div className="loading-spinner">
+                        <FaSpinner className="spinner" />
+                      </div>
+                      <p>Loading video...</p>
+                    </div>
+                  ) : (
+                    <>
+                      <video
+                        id={`video-${index}`}
+                        className="project-video-element"
+                        preload="none"
+                        controls
+                        controlsList="nodownload"
+                        data-src={project.video}
+                        onLoadedData={() => handleVideoLoad(index)}
+                        onError={() => handleVideoError(index)}
+                        poster={`${project.video.replace(/\.[^/.]+$/, '')}_poster.jpg`}
+                      >
+                        <source type={project.video.endsWith('.MOV') ? 'video/quicktime' : 'video/mp4'} />
+                        Your browser does not support the video tag.
+                      </video>
+                      
+                      {videoStates[index] === 'loading' && (
+                        <div className="video-loading">
+                          <FaSpinner className="spinner" />
+                          <span>Loading video...</span>
+                        </div>
+                      )}
+                      
+                      {videoStates[index] === 'error' && (
+                        <div className="video-error">
+                          <FaPlay />
+                          <span>Video failed to load</span>
+                          <button onClick={() => {
+                            const video = document.getElementById(`video-${index}`)
+                            if (video) video.load()
+                          }}>Retry</button>
+                        </div>
+                      )}
+                    </>
+                  )}
                 </div>
               </div>
 

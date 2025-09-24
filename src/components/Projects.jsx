@@ -1,11 +1,8 @@
-import React, { useState, useRef, useEffect } from 'react'
-import { FaCode, FaUsers, FaClock, FaTrophy, FaDollarSign, FaShieldAlt, FaPlay, FaSpinner } from 'react-icons/fa'
+import React from 'react'
+import { FaCode, FaUsers, FaClock, FaTrophy, FaDollarSign, FaShieldAlt } from 'react-icons/fa'
 import './Projects.css'
 
 const Projects = () => {
-  const [videoStates, setVideoStates] = useState({})
-  const [isIntersecting, setIsIntersecting] = useState({})
-
   const projects = [
     {
       title: "WASSCE Past Questions Web App",
@@ -34,45 +31,6 @@ const Projects = () => {
       category: "Business"
     }
   ]
-
-  // Video lazy loading and optimization
-  const videoRefs = useRef({})
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            const videoIndex = entry.target.dataset.videoIndex
-            setIsIntersecting(prev => ({ ...prev, [videoIndex]: true }))
-            
-            // Load video when it comes into view
-            const video = entry.target.querySelector('video')
-            if (video && !video.src) {
-              video.src = video.dataset.src
-              video.load()
-            }
-          }
-        })
-      },
-      { threshold: 0.1, rootMargin: '50px' }
-    )
-
-    // Observe all video containers
-    Object.values(videoRefs.current).forEach(ref => {
-      if (ref) observer.observe(ref)
-    })
-
-    return () => observer.disconnect()
-  }, [])
-
-  const handleVideoLoad = (index) => {
-    setVideoStates(prev => ({ ...prev, [index]: 'loaded' }))
-  }
-
-  const handleVideoError = (index) => {
-    setVideoStates(prev => ({ ...prev, [index]: 'error' }))
-  }
 
   return (
     <section id="projects" className="projects">

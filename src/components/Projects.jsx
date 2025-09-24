@@ -50,54 +50,17 @@ const Projects = () => {
               </div>
 
               <div className="project-video">
-                <div 
-                  className="video-container"
-                  ref={el => videoRefs.current[index] = el}
-                  data-video-index={index}
-                >
-                  {!isIntersecting[index] ? (
-                    <div className="video-placeholder">
-                      <div className="loading-spinner">
-                        <FaSpinner className="spinner" />
-                      </div>
-                      <p>Loading video...</p>
-                    </div>
-                  ) : (
-                    <>
-                      <video
-                        id={`video-${index}`}
-                        className="project-video-element"
-                        preload="none"
-                        controls
-                        controlsList="nodownload"
-                        data-src={project.video}
-                        onLoadedData={() => handleVideoLoad(index)}
-                        onError={() => handleVideoError(index)}
-                        poster={`${project.video.replace(/\.[^/.]+$/, '')}_poster.jpg`}
-                      >
-                        <source type={project.video.endsWith('.MOV') ? 'video/quicktime' : 'video/mp4'} />
-                        Your browser does not support the video tag.
-                      </video>
-                      
-                      {videoStates[index] === 'loading' && (
-                        <div className="video-loading">
-                          <FaSpinner className="spinner" />
-                          <span>Loading video...</span>
-                        </div>
-                      )}
-                      
-                      {videoStates[index] === 'error' && (
-                        <div className="video-error">
-                          <FaPlay />
-                          <span>Video failed to load</span>
-                          <button onClick={() => {
-                            const video = document.getElementById(`video-${index}`)
-                            if (video) video.load()
-                          }}>Retry</button>
-                        </div>
-                      )}
-                    </>
-                  )}
+                <div className="video-container">
+                  <video
+                    id={`video-${index}`}
+                    className="project-video-element"
+                    preload="metadata"
+                    controls
+                    controlsList="nodownload"
+                  >
+                    <source src={project.video} type={project.video.endsWith('.MOV') ? 'video/quicktime' : 'video/mp4'} />
+                    Your browser does not support the video tag.
+                  </video>
                 </div>
               </div>
 

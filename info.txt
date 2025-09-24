@@ -1,0 +1,79 @@
+🌐 Nigel Nortey – Portfolio Draft
+Hero Section
+
+Nigel Nortey
+Backend Developer | Problem Solver
+
+💡 “Turning complex problems into simple backend solutions.”
+
+[💻 GitHub] [🔗 LinkedIn] [✉️ Email]
+
+About Me
+
+I am a backend developer passionate about building software that addresses challenges across industries. I enjoy solving complex backend problems, designing reliable APIs, and creating systems that improve everyday life.
+
+Currently, I’m focused on developing scalable applications and experimenting with systems that automate workflows and streamline business operations.
+
+Experience
+
+💼 Internship – IT Consortium (June 2025 – July 2025)
+Automated Debit Scheduler
+
+Built a debit scheduling platform with React, FastAPI, and PostgreSQL.
+
+Implemented recurring debits, transaction history, and real-time notifications.
+
+Developed admin panel for user tracking and system-wide metrics.
+
+Impact: Streamlined financial operations by automating manual debit processes.
+
+Projects
+
+📘 WASSCE Past Questions Web App
+
+Full-stack practice platform with React, Node.js, and SQL.
+
+Features: Practice & timed exam modes, marking scheme feedback, progress tracking, daily streaks.
+
+Impact: Helped students prepare effectively with analytics & instant feedback.
+
+🎥 Video Demo (Embed here)
+
+🧑🏽‍💼 Employee Management & Payroll System
+
+Full-stack app with React, Node.js, and SQL.
+
+Features: Attendance tracking, leave management, role-based access control, automated payroll with tax & NHIS deductions.
+
+Impact: Reduced payroll errors and simplified HR processes.
+
+🎥 Video Demo (Embed here)
+
+Skills & Tech Stack
+
+Languages: Python, JavaScript, SQL
+
+Frameworks: FastAPI, Node.js, React
+
+Databases: PostgreSQL, MySQL
+
+Tools: Git, Docker, Firebase, Supabase
+
+Focus Areas: Backend APIs, scalable architecture, system automation
+
+Currently Working On
+
+Adding AI grading to the WASSCE application (trained on WAEC mark schemes).
+
+Exploring direct peer-to-peer money transfers without banks.
+
+📄 Resume
+
+👉 [Download My Resume]
+
+Contact
+
+📧 [nigelnortey123@gmail.com]
+🔗 [https://www.linkedin.com/in/nigel-nortey-74501b212k]
+💻 [https://github.com/N1gel7]
+

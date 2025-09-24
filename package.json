@@ -1,0 +1,31 @@
+{
+  "name": "nigel-nortey-portfolio",
+  "version": "1.0.0",
+  "description": "Nigel Nortey's Portfolio Website",
+  "main": "index.js",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "start": "vite"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-icons": "^4.12.0",
+    "si": "^2.0.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.43",
+    "@types/react-dom": "^18.2.17",
+    "@vitejs/plugin-react": "^4.2.1",
+    "vite": "^5.0.8"
+  },
+  "keywords": [
+    "portfolio",
+    "react",
+    "backend-developer"
+  ],
+  "author": "Nigel Nortey",
+  "license": "MIT"
+}
